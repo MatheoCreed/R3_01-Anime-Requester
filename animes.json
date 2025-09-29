@@ -1,0 +1,35 @@
+
+{
+  "animes": [
+    {
+      "id": 1,
+      "title": "Fullmetal Alchemist: Brotherhood",
+      "image": "https://cdn.myanimelist.net/images/anime/1208/94745.jpg",
+      "synopsis": "Deux frères alchimistes cherchent la pierre philosophale après un rituel qui a mal tourné."
+    },
+    {
+      "id": 2,
+      "title": "Attack on Titan",
+      "image": "https://cdn.myanimelist.net/images/anime/10/47347.jpg",
+      "synopsis": "Dans un monde où l'humanité vit derrière des murs, des titans dévorent les humains."
+    },
+    {
+      "id": 3,
+      "title": "Death Note",
+      "image": "https://cdn.myanimelist.net/images/anime/9/9453.jpg",
+      "synopsis": "Un étudiant trouve un carnet qui permet de tuer quiconque en y écrivant son nom."
+    },
+    {
+      "id": 4,
+      "title": "Naruto",
+      "image": "https://cdn.myanimelist.net/images/anime/13/17405.jpg",
+      "synopsis": "Un jeune ninja rêve de devenir Hokage malgré le démon renard enfermé en lui."
+    },
+    {
+      "id": 5,
+      "title": "One Piece",
+      "image": "https://cdn.myanimelist.net/images/anime/6/73245.jpg",
+      "synopsis": "Monkey D. Luffy et son équipage partent à la recherche du trésor légendaire, le One Piece."
+    }
+  ]
+}

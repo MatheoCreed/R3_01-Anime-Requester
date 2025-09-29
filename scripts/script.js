@@ -14,15 +14,19 @@ async function fetchAndDisplayAnime() {
     try {
         const response = await fetch(url, options);
         const data = await response.json(); 
-        // Vérifie si des résultats existent
         if (data.data && data.data.length > 0) {
             data.data.forEach(anime => {
-                console.log(`Titre : ${anime.title}`);
-                console.log(`Synopsis : ${anime.synopsis}`);
-                console.log(`catégories : ${anime.genres}`)
-                console.log(`Classement : ${anime.ranking}`);
-                console.log(`Nombre d'épisodes : ${anime.episodes}`);
-                console.log('-----------------------------');
+                const Titre = anime.title;
+                const Synopsis = anime.synopsis;
+                const Genres = anime.genres;
+                const Classement = anime.ranking;
+                const Episodes = anime.episodes;
+                console.log("Tire : " + Titre + 
+                    "\nSynopsis : " + Synopsis + 
+                    "\nGenres : " + Genres + 
+                    "\nClassement : " + Classement + 
+                    "\nNombre d'épisodes : " + Episodes + 
+                    "\n-----------------------------");
             });
         } else {
             console.log('Aucun anime trouvé.');

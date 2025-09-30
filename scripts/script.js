@@ -16,10 +16,11 @@ fetch("https://anime-db.p.rapidapi.com/anime?page=1&size=10&search=Fullmetal&gen
         card.innerHTML = `
             <h3>${anime.title}</h3>
             <img src="${anime.image}" alt="${anime.title}">
-            <p>${anime.synopsis}</p>
-            <p>Genre : ${anime.genres.join(", ")}</p>
-            <p>Classement : ${anime.ranking}</p>
-            <p>Episodes : ${anime.episodes}</p>
+            <p><i class="fa-solid fa-layer-group"></i> <u>Genre :</u> ${anime.genres.join(", ")}</p>
+            <p><i class="fa-solid fa-ranking-star"></i> <u>Classement :</u> ${anime.ranking}</p>
+            <p><i class="fa-solid fa-film"></i> <u>Episodes :</u> ${anime.episodes}</p>
+            <p><i class="fa-solid fa-book"></i> <u>Synopsis :</u> ${anime.synopsis}</p>
+            
         `;
 
         container.appendChild(card);

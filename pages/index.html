@@ -7,10 +7,19 @@
     <title>Anime Requester</title>
 </head>
 <body>
+    <div>
+        <select id="filterType">
+            <option value="title">Titre</option>
+            <option value="id">Identifiant</option>
+            <option value="ranking">Classement</option>
+        </select>
+        <input type="text" id="search" placeholder="Rechercher...">
+        <button id="searchBtn">Rechercher</button>
+    </div>
     
     <div id="results">
-        <script src="../scripts/script.js"></script>
     </div>
-
+    
+    <script src="../scripts/script.js"></script>
 </body>
 </html>

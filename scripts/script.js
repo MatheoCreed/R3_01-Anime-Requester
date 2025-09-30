@@ -16,7 +16,9 @@ fetch("https://anime-db.p.rapidapi.com/anime?page=1&size=10&search=Fullmetal&gen
                 <h3>${anime.title}</h3>
                 <img src="${anime.image}" alt="${anime.title}">
                 <p>${anime.synopsis}</p>
-                <p>Genre : ${anime.genre}</p>
+                <p>Genre : ${anime.genres.join(", ")}</p>
+                <p>Classement : ${anime.ranking}</p>
+                <p>Episodes : ${anime.episodes}</p>
             `;
 
             document.body.appendChild(card);

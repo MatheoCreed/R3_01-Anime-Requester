@@ -11,6 +11,21 @@ fetch("https://anime-db.p.rapidapi.com/anime?page=1&size=10&search=Fullmetal&gen
         data.data.forEach(anime => {
             const card = document.createElement("div");
             card.className = "card";
+=======
+  method: "GET",
+  headers: {
+    "x-rapidapi-host": "anime-db.p.rapidapi.com",
+    "x-rapidapi-key": "6086c83303msha21ced5cae2b469p13aae7jsn8eac00c91c09" 
+  }
+})
+.then(response => response.json())
+.then(data => {
+    const container = document.getElementById("results")
+
+    data.data.forEach(anime => {
+        const card = document.createElement("div");
+        card.className = "card";
+>>>>>>> origin/Affichage
 
             card.innerHTML = `
                 <h3>${anime.title}</h3>

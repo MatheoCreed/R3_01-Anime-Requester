@@ -48,3 +48,29 @@ body {
     color: #333;
     text-align: left;
 }
+
+body.themeSombre {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.themeSombre header {
+  background-color: #333;
+  color: #f8f9fa;
+}
+
+body.themeSombre .card {
+  background-color: #2c2c2c;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+body.themeSombre .card p, body.themeSombre .card h3 {
+  background-color: #2c2c2c;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+  color : white;
+}
+
+body.themeSombre main {
+  background-color: #1e1e1e;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+}

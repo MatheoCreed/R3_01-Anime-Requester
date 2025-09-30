@@ -2,12 +2,12 @@ fetch("https://anime-db.p.rapidapi.com/anime?page=1&size=10&search=Fullmetal&gen
       method: "GET",
       headers: {
         "x-rapidapi-host": "anime-db.p.rapidapi.com",
-        "x-rapidapi-key": "136c0c4dcdmsh920a3205050b6d3p164bb6jsn5e0e89c2aad1" // ⚠️ ta clé
+        "x-rapidapi-key": "6086c83303msha21ced5cae2b469p13aae7jsn8eac00c91c09" 
       }
     })
     .then(response => response.json())
     .then(data => {
-
+        const container = document.getElementById("results");
         data.data.forEach(anime => {
             const card = document.createElement("div");
             card.className = "card";
@@ -21,6 +21,18 @@ fetch("https://anime-db.p.rapidapi.com/anime?page=1&size=10&search=Fullmetal&gen
                 <p>Episodes : ${anime.episodes}</p>
             `;
 
-            document.body.appendChild(card);
+            container.appendChild(card);
         });
     })
+
+const boutonTheme = document.getElementById("toggle-theme");
+
+if (localStorage.getItem("theme") === "sombre") {
+  document.body.classList.add("themeSombre");
+}
+
+boutonTheme.addEventListener("click", () => {
+  document.body.classList.toggle("themeSombre");
+  const themeActuel = document.body.classList.contains("themeSombre") ? "sombre" : "clair";
+  localStorage.setItem("theme", themeActuel);
+});

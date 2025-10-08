@@ -79,17 +79,20 @@ function displayAnimes(animes) {
   animes.forEach(anime => {
     const card = document.createElement("div");
     card.className = "card";
+
     card.innerHTML = `
+      <h3>${anime.title}</h3>
       <img src="${anime.image}" alt="${anime.title}">
-      <div class="card-content">
-        <h3>${anime.title}</h3>
-        <p><strong>ID:</strong> ${anime._id || "N/A"} | <strong>Ranking:</strong> ${anime.ranking || "?"}</p>
-        <p>${anime.synopsis || ""}</p>
-      </div>
+      <p><i class="fa-solid fa-layer-group"></i> <u>Genre :</u> ${anime.genres?.join(", ") || "?"}</p>
+      <p><i class="fa-solid fa-ranking-star"></i> <u>Classement :</u> ${anime.ranking || "?"}</p>
+      <p><i class="fa-solid fa-film"></i> <u>Episodes :</u> ${anime.episodes || "?"}</p>
+      <p><i class="fa-solid fa-book"></i> <u>Synopsis :</u> ${anime.synopsis || "Pas de synopsis disponible."}</p>
     `;
+
     container.appendChild(card);
   });
 }
+
 
 document.getElementById("searchBtn").addEventListener("click", () => {
   const query = document.getElementById("search").value.trim();

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/style.css">
     <script src="https://kit.fontawesome.com/26ef24d2a5.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="../images/animeDB.png">
     <title>Anime Requester</title>
 </head>
 <body>
@@ -14,13 +15,16 @@
         <p></p>
     </header>
     <div class="search-div">
-        <select class="select" id="filterType">
+        <select class="select" id="filterType" selected="Filtre">
+            <option value="" selected disabled hidden>Filtre</option>
             <option value="title">Titre</option>
             <option value="id">Identifiant</option>
             <option value="ranking">Classement</option>
         </select>
-        <input class="search" type="text" id="search" placeholder="Rechercher...">
-        <button class="searchButton" id="searchBtn">Rechercher</button>
+        <div>
+            <input class="search" type="text" id="search" placeholder="Rechercher...">
+            <button class="searchButton" id="searchBtn">Rechercher</button>
+        </div>
     </div>
     
     <div id="results">

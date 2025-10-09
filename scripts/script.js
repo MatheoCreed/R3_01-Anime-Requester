@@ -2,7 +2,8 @@
 // 98737f8120msh98dc51e460a9eb4p1ea886jsnb5d61cf7a012
 
 const boutonTheme = document.getElementById("toggle-theme");
-
+const filterTypeSelect = document.getElementById("filterType");
+const genreListDiv = document.getElementById("genreList");
 if (localStorage.getItem("theme") === "sombre") {
   document.body.classList.add("themeSombre");
 }
@@ -37,7 +38,7 @@ function loadAnimesById(id = "", callback) {
     method: "GET",
     headers: {
       "x-rapidapi-host": "anime-db.p.rapidapi.com",
-      "x-rapidapi-key": "98737f8120msh98dc51e460a9eb4p1ea886jsnb5d61cf7a012"
+      "x-rapidapi-key": "6f464de156msh2e28f7c658a93c0p103939jsnb8535fa80c55"
     }
   })
     .then(res => res.json())
@@ -54,7 +55,7 @@ function loadAnimesByRanking(rank = "", callback) {
     method: "GET",
     headers: {
       "x-rapidapi-host": "anime-db.p.rapidapi.com",
-      "x-rapidapi-key": "98737f8120msh98dc51e460a9eb4p1ea886jsnb5d61cf7a012"
+      "x-rapidapi-key": "6f464de156msh2e28f7c658a93c0p103939jsnb8535fa80c55"
     }
   })
     .then(res => res.json())
@@ -67,8 +68,7 @@ function loadAnimesByRanking(rank = "", callback) {
     .catch(err => console.error("Erreur API :", err));
 }
 
-const filterTypeSelect = document.getElementById("filterType");
-const genreListDiv = document.getElementById("genreList");
+
 
 filterTypeSelect.addEventListener("change", () => {
     if (filterTypeSelect.value === "genre") {
@@ -94,8 +94,8 @@ function loadAnimesByGenres(genres = "", callback) {
       else displayAnimes(allAnimes);
     })
     .catch(err => console.error("Erreur API :", err));
-}
-*/
+}*/
+
 function displayAnimes(animes) {
   const container = document.getElementById("results");
   container.innerHTML = "";
@@ -105,13 +105,7 @@ function displayAnimes(animes) {
     return;
   }
 
-  /*function genreCheckboxes(genres) {
-    const genreListDiv = document.getElementById("genreList");
-    genreListDiv.innerHTML = "";
-
-    genreCheckboxes.forEach(genre => {
-      const genreName = genre
-  }*/
+ 
 
   animes.forEach(anime => {
     const card = document.createElement("div");
@@ -129,6 +123,19 @@ function displayAnimes(animes) {
     container.appendChild(card);
   });
 }
+
+
+const scrollBtn = document.getElementById("boutonHaut");
+
+
+
+// Clique pour remonter en haut
+scrollBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
 
 
 document.getElementById("searchBtn").addEventListener("click", () => {

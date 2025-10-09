@@ -9,7 +9,7 @@ body {
 
 header {
     width: 100%;
-    background-color: #aad5ff;
+    background-color: #B6D8F2;
     padding: 10px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     text-align: center;
@@ -31,22 +31,66 @@ h1 {
     max-width: 1200px;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .select {
   font-size: 15px;
   font-family: 'comic sans ms', sans-serif;
-  margin-left: 180px;
-  width: 87px;
+  width: 100px;
   height: 30px;
   border-radius: 5px;
-  margin-right: 40px;
-
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left : 20px;
 }
+
 .search{
   border-radius: 5px;
+  height: 30px;
+  width: 450px;
+  margin-left: 5px;
+  margin-right: 20px;
 }
 
-div.search-div {
-  margin-left 80%;
+.select option{
+  font-size: 15px;
+  font-family: 'comic sans ms', sans-serif;
+}
+.div-button {
+  display: flex;
+  gap: 10px;
+  width: 30vw;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 15px;
+  font-family: 'comic sans ms', sans-serif;
+}
+
+
+.search-div {
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 60vw;
+  background-color: #5784BA;
+  border-radius:10px;
+}
+
+body.themeSombre .search-div {
+  background-color: #7A90A4;
+}
+
+.div-button button {
+  width: 120px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  height: 30px;
+
 }
 .card {
     background-color: #fff;
@@ -107,7 +151,7 @@ body.themeSombre {
 
 body.themeSombre header {
     width: 100%;
-    background-color: #2c3b49;
+    background-color: #344D59;
     padding: 10px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     text-align: center;
@@ -135,10 +179,15 @@ body.themeSombre main {
     top: 20px;
     right: 20px;
     padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
+    background-color: #F7F6CF;
+    color: rgb(0, 0, 0);
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+body.themeSombre .boutonTheme {
+    background-color: #B8CBD0;
+    color: #000000;
 }

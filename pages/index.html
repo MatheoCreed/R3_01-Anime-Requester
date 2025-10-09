@@ -11,21 +11,23 @@
 <body>
     <header>
         <button class="boutonTheme" id="toggle-theme">🌓 Mode Sombre</button>
-        <h1 id="emoji-title"> Anime Requester </h1>
+        <h1 id="emoji-title"><a href="index.html">Anime Requester</a></h1>
         <p></p>
     </header>
     <div class="search-div">
         <select class="select" id="filterType" selected="Filtre">
-            <option value="" selected disabled hidden>Filtre</option>
+            <option value="title" selected disabled hidden>Filtre</option>
             <option value="title">Titre</option>
             <option value="id">Identifiant</option>
             <option value="ranking">Classement</option>
         </select>
-        <div>
             <input class="search" type="text" id="search" placeholder="Rechercher...">
-            <button class="searchButton" id="searchBtn">Rechercher</button>
-        </div>
+            <div class="div-button">
+                <button class="searchButton" id="searchBtn">Rechercher</button>
+                <button class="resetButton" id="searchBtn"><a href="index.html">Reinitialiser</a></button>
+            </div>
     </div>
+
     
     <div id="results">
     </div>

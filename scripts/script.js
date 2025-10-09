@@ -69,13 +69,17 @@ function loadAnimesByRanking(rank = "", callback) {
 
 const filterTypeSelect = document.getElementById("filterType");
 const genreListDiv = document.getElementById("genreList");
+const searchBar = document.getElementById("search");
 
 filterTypeSelect.addEventListener("change", () => {
-    if (filterTypeSelect.value === "genre") {
-        genreListDiv.style.display = "block"; 
-    } else {
-        genreListDiv.style.display = "none"; 
-    }
+  if (filterTypeSelect.value === "genre") {
+    searchBar.style.display = "none";
+    genreCheckboxes(); 
+  } else {
+    // Remettre la valeur par défaut (inline-block) pour la barre de recherche
+    searchBar.style.display = "inline-block"; // doit correspondre au CSS de base
+    genreListDiv.style.display = "none";
+  }
 });
 
 /*
@@ -105,14 +109,6 @@ function displayAnimes(animes) {
     return;
   }
 
-  /*function genreCheckboxes(genres) {
-    const genreListDiv = document.getElementById("genreList");
-    genreListDiv.innerHTML = "";
-
-    genreCheckboxes.forEach(genre => {
-      const genreName = genre
-  }*/
-
   animes.forEach(anime => {
     const card = document.createElement("div");
     card.className = "card";
@@ -130,6 +126,35 @@ function displayAnimes(animes) {
   });
 }
 
+
+let genre;
+function genreCheckboxes() {
+  fetch(`https://anime-db.p.rapidapi.com/genre`, {
+    method: "GET",
+    headers: {
+      "x-rapidapi-host": "anime-db.p.rapidapi.com",
+      "x-rapidapi-key": "98737f8120msh98dc51e460a9eb4p1ea886jsnb5d61cf7a012"
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      genre = data;
+      const genreListDiv = document.getElementById("genreList");
+      genreListDiv.innerHTML = "";
+      genreListDiv.style.display = "block";
+      genre.forEach(g => {
+        const label = document.createElement("label");
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.id = g;
+        checkbox.value = g;
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(g._id));
+        genreListDiv.appendChild(label);
+      });
+    })
+    .catch(err => console.error("Erreur API :", err));
+}
 
 document.getElementById("searchBtn").addEventListener("click", () => {
   const query = document.getElementById("search").value.trim();

@@ -67,6 +67,35 @@ function loadAnimesByRanking(rank = "", callback) {
     .catch(err => console.error("Erreur API :", err));
 }
 
+const filterTypeSelect = document.getElementById("filterType");
+const genreListDiv = document.getElementById("genreList");
+
+filterTypeSelect.addEventListener("change", () => {
+    if (filterTypeSelect.value === "genre") {
+        genreListDiv.style.display = "block"; 
+    } else {
+        genreListDiv.style.display = "none"; 
+    }
+});
+
+/*
+function loadAnimesByGenres(genres = "", callback) {
+  fetch(`https://anime-db.p.rapidapi.com/${genres}`, {
+    method: "GET",
+    headers: {
+      "x-rapidapi-host": "anime-db.p.rapidapi.com",
+      "x-rapidapi-key": "98737f8120msh98dc51e460a9eb4p1ea886jsnb5d61cf7a012"
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      allAnimes = [data];
+      if (callback) callback(allAnimes);
+      else displayAnimes(allAnimes);
+    })
+    .catch(err => console.error("Erreur API :", err));
+}
+*/
 function displayAnimes(animes) {
   const container = document.getElementById("results");
   container.innerHTML = "";
@@ -75,6 +104,14 @@ function displayAnimes(animes) {
     container.innerHTML = "<p>Aucun anime trouvé.</p>";
     return;
   }
+
+  /*function genreCheckboxes(genres) {
+    const genreListDiv = document.getElementById("genreList");
+    genreListDiv.innerHTML = "";
+
+    genreCheckboxes.forEach(genre => {
+      const genreName = genre
+  }*/
 
   animes.forEach(anime => {
     const card = document.createElement("div");
@@ -102,3 +139,5 @@ document.getElementById("searchBtn").addEventListener("click", () => {
   else if (filterType === "id") loadAnimesById(query);
   else if (filterType === "ranking") loadAnimesByRanking(query);
 });
+
+

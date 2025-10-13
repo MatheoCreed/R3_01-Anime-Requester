@@ -4,21 +4,31 @@
 const boutonTheme = document.getElementById("toggle-theme");
 const filterTypeSelect = document.getElementById("filterType");
 const genreListDiv = document.getElementById("genreList");
+const scrollBtn = document.getElementById("boutonHaut");
+let allAnimes = [];
 let cleapisaisie = "";
+
 if (localStorage.getItem("theme") === "sombre") {
   document.body.classList.add("themeSombre");
 }
 
-window.onload = function() {
-      const saisie = prompt("Entrez votre clé API :");
-      if (saisie !== null) {
-        cleapisaisie = saisie.trim();
-      } else {
-        alert("Aucune saisie effectuée.");
-      }
-    };
+    window.onload = function() {
+  const sauvegardecle = localStorage.getItem("apiKey");
+  if (sauvegardecle) {
+    cleapisaisie = sauvegardecle;
+    alert("Clé API chargée.");
+  } else {
+    const saisie = prompt("Veuillez entrer votre clé API :");
+    if (saisie !== null && saisie.trim() !== "") {
+      cleapisaisie = saisie.trim();
+      localStorage.setItem("apiKey", cleapisaisie);
+      alert("Clé API enregistrée.");
+    } else {
+      alert("Aucune clé API saisie.");
+    }
+  }
+};
     
-
 boutonTheme.addEventListener("click", () => {
   document.body.classList.add("fade-transition");
 
@@ -30,8 +40,6 @@ boutonTheme.addEventListener("click", () => {
     document.body.classList.remove("fade-transition");
   }, 500);
 });
-
-let allAnimes = [];
 
 function loadAnimes(query = "", callback) {
   fetch(`https://anime-db.p.rapidapi.com/anime?page=1&size=10&search=${query}`, {
@@ -85,8 +93,6 @@ function loadAnimesByRanking(rank = "", callback) {
     .catch(err => console.error("Erreur API :", err));
 }
 
-
-
 filterTypeSelect.addEventListener("change", () => {
     if (filterTypeSelect.value === "genre") {
         genreListDiv.style.display = "block"; 
@@ -94,7 +100,6 @@ filterTypeSelect.addEventListener("change", () => {
         genreListDiv.style.display = "none"; 
     }
 });
-
 
 function displayAnimes(animes) {
   const container = document.getElementById("results");
@@ -104,8 +109,6 @@ function displayAnimes(animes) {
     container.innerHTML = "<p>Aucun anime trouvé.</p>";
     return;
   }
-
- 
 
   animes.forEach(anime => {
     const card = document.createElement("div");
@@ -124,19 +127,12 @@ function displayAnimes(animes) {
   });
 }
 
-
-const scrollBtn = document.getElementById("boutonHaut");
-
-
-
 scrollBtn.addEventListener("click", () => {
   window.scrollTo({
     top: 0,
     behavior: "smooth"
   });
 });
-
-
 
 document.getElementById("searchBtn").addEventListener("click", () => {
   const query = document.getElementById("search").value.trim();

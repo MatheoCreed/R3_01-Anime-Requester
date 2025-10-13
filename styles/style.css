@@ -189,6 +189,21 @@ body.themeSombre main {
 .boutonTheme {
     position: fixed;
     top: 20px;
+    right: 90px;
+    padding: 10px 20px;
+    background-color: #F7F6CF;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 100px;
+}
+
+.boutonTheme2 {
+    position: fixed;
+    height: 37px;
+    top: 20px;
     right: 20px;
     padding: 10px 20px;
     background-color: #F7F6CF;
@@ -197,6 +212,7 @@ body.themeSombre main {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    border-radius: 100px;
 }
 
 body.themeSombre .boutonTheme {
@@ -204,6 +220,10 @@ body.themeSombre .boutonTheme {
     color: #000000;
 }
 
+body.themeSombre .boutonTheme2 {
+    background-color: #B8CBD0;
+    color: #000000;
+}
 .top-buttons {
   position: fixed;
   top: 20px;

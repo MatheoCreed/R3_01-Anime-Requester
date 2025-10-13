@@ -13,7 +13,6 @@ window.onload = function() {
       const saisie = prompt("Entrez votre clé API :");
       if (saisie !== null) {
         cleapisaisie = saisie.trim();
-        alert("Vous avez saisi : " + saisie);
       } else {
         alert("Aucune saisie effectuée.");
       }

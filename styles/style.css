@@ -5,7 +5,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
+body.fade-transition {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
 
 header {
     width: 100%;
@@ -101,6 +106,13 @@ body.themeSombre .search-div {
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin: 10px;
+}
+
+.card,
+header,
+.search-div,
+.boutonTheme {
+  transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
 }
 
 .card:hover {

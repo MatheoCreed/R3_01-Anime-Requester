@@ -8,9 +8,15 @@ if (localStorage.getItem("theme") === "sombre") {
 }
 
 boutonTheme.addEventListener("click", () => {
+  document.body.classList.add("fade-transition");
+
   document.body.classList.toggle("themeSombre");
   const themeActuel = document.body.classList.contains("themeSombre") ? "sombre" : "clair";
   localStorage.setItem("theme", themeActuel);
+
+  setTimeout(() => {
+    document.body.classList.remove("fade-transition");
+  }, 500);
 });
 
 let allAnimes = [];

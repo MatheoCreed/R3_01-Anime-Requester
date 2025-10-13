@@ -4,9 +4,21 @@
 const boutonTheme = document.getElementById("toggle-theme");
 const filterTypeSelect = document.getElementById("filterType");
 const genreListDiv = document.getElementById("genreList");
+let cleapisaisie = "";
 if (localStorage.getItem("theme") === "sombre") {
   document.body.classList.add("themeSombre");
 }
+
+window.onload = function() {
+      const saisie = prompt("Entrez votre clé API :");
+      if (saisie !== null) {
+        cleapisaisie = saisie.trim();
+        alert("Vous avez saisi : " + saisie);
+      } else {
+        alert("Aucune saisie effectuée.");
+      }
+    };
+    
 
 boutonTheme.addEventListener("click", () => {
   document.body.classList.toggle("themeSombre");
@@ -21,7 +33,7 @@ function loadAnimes(query = "", callback) {
     method: "GET",
     headers: {
       "x-rapidapi-host": "anime-db.p.rapidapi.com",
-      "x-rapidapi-key": "6f464de156msh2e28f7c658a93c0p103939jsnb8535fa80c55"
+      "x-rapidapi-key": cleapisaisie
     }
   })
     .then(res => res.json())
@@ -31,14 +43,14 @@ function loadAnimes(query = "", callback) {
       else displayAnimes(allAnimes);
     })
     .catch(err => console.error("Erreur API :", err));
-}
+  }
 
 function loadAnimesById(id = "", callback) {
   fetch(`https://anime-db.p.rapidapi.com/anime/by-id/${id}`, {
     method: "GET",
     headers: {
       "x-rapidapi-host": "anime-db.p.rapidapi.com",
-      "x-rapidapi-key": "6f464de156msh2e28f7c658a93c0p103939jsnb8535fa80c55"
+      "x-rapidapi-key": cleapisaisie
     }
   })
     .then(res => res.json())
@@ -55,7 +67,7 @@ function loadAnimesByRanking(rank = "", callback) {
     method: "GET",
     headers: {
       "x-rapidapi-host": "anime-db.p.rapidapi.com",
-      "x-rapidapi-key": "6f464de156msh2e28f7c658a93c0p103939jsnb8535fa80c55"
+      "x-rapidapi-key": cleapisaisie
     }
   })
     .then(res => res.json())
@@ -78,23 +90,6 @@ filterTypeSelect.addEventListener("change", () => {
     }
 });
 
-/*
-function loadAnimesByGenres(genres = "", callback) {
-  fetch(`https://anime-db.p.rapidapi.com/${genres}`, {
-    method: "GET",
-    headers: {
-      "x-rapidapi-host": "anime-db.p.rapidapi.com",
-      "x-rapidapi-key": "98737f8120msh98dc51e460a9eb4p1ea886jsnb5d61cf7a012"
-    }
-  })
-    .then(res => res.json())
-    .then(data => {
-      allAnimes = [data];
-      if (callback) callback(allAnimes);
-      else displayAnimes(allAnimes);
-    })
-    .catch(err => console.error("Erreur API :", err));
-}*/
 
 function displayAnimes(animes) {
   const container = document.getElementById("results");
@@ -129,13 +124,13 @@ const scrollBtn = document.getElementById("boutonHaut");
 
 
 
-// Clique pour remonter en haut
 scrollBtn.addEventListener("click", () => {
   window.scrollTo({
     top: 0,
     behavior: "smooth"
   });
 });
+
 
 
 document.getElementById("searchBtn").addEventListener("click", () => {

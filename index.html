@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <script src="https://kit.fontawesome.com/26ef24d2a5.js" crossorigin="anonymous"></script>
+    <script defer src="scripts/script.js"></script>
     <title>Anime Requester</title>
 </head>
 <body>
     <header>
-        <button class="boutonTheme" id="toggle-theme">🌓 Mode Sombre</button>
         <h1 id="emoji-title"> Anime Requester </h1>
         <p></p>
     </header>
+
+    <div class="top-buttons">
+        <button class="boutonTheme" id="toggle-theme">🌓 Mode Sombre</button>
+    <button id="boutonHaut" title="Retour en haut"><i class="fa-solid fa-arrow-up"></i></button>
+    </div>
+    
+
     <div>
         <select id="filterType">
             <option value="title">Titre</option>
@@ -30,6 +37,6 @@
     <div id="results">
     </div>
     
-    <script src="../scripts/script.js"></script>
+    
 </body>
 </html>

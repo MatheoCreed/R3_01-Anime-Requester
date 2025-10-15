@@ -37,7 +37,7 @@ function loadAnimesById(id = "", callback) {
     method: "GET",
     headers: {
       "x-rapidapi-host": "anime-db.p.rapidapi.com",
-      "x-rapidapi-key": "98737f8120msh98dc51e460a9eb4p1ea886jsnb5d61cf7a012"
+      "x-rapidapi-key": "6f464de156msh2e28f7c658a93c0p103939jsnb8535fa80c55"
     }
   })
     .then(res => res.json())
@@ -54,12 +54,11 @@ function loadAnimesByRanking(rank = "", callback) {
     method: "GET",
     headers: {
       "x-rapidapi-host": "anime-db.p.rapidapi.com",
-      "x-rapidapi-key": "98737f8120msh98dc51e460a9eb4p1ea886jsnb5d61cf7a012"
+      "x-rapidapi-key": "6f464de156msh2e28f7c658a93c0p103939jsnb8535fa80c55"
     }
   })
     .then(res => res.json())
     .then(data => {
-     allAnimes = [data];
      allAnimes = [data];
       if (callback) callback(allAnimes);
       else displayAnimes(allAnimes);
@@ -76,30 +75,12 @@ filterTypeSelect.addEventListener("change", () => {
     searchBar.style.display = "none";
     genreCheckboxes(); 
   } else {
-    // Remettre la valeur par défaut (inline-block) pour la barre de recherche
-    searchBar.style.display = "inline-block"; // doit correspondre au CSS de base
+    searchBar.style.display = "inline-block"; 
     genreListDiv.style.display = "none";
   }
 });
 
-/*
-function loadAnimesByGenres(genres = "", callback) {
-  fetch(`https://anime-db.p.rapidapi.com/${genres}`, {
-    method: "GET",
-    headers: {
-      "x-rapidapi-host": "anime-db.p.rapidapi.com",
-      "x-rapidapi-key": "98737f8120msh98dc51e460a9eb4p1ea886jsnb5d61cf7a012"
-    }
-  })
-    .then(res => res.json())
-    .then(data => {
-      allAnimes = [data];
-      if (callback) callback(allAnimes);
-      else displayAnimes(allAnimes);
-    })
-    .catch(err => console.error("Erreur API :", err));
-}
-*/
+
 function displayAnimes(animes) {
   const container = document.getElementById("results");
   container.innerHTML = "";
@@ -121,7 +102,6 @@ function displayAnimes(animes) {
       <p><i class="fa-solid fa-film"></i> <u>Episodes :</u> ${anime.episodes || "?"}</p>
       <p><i class="fa-solid fa-book"></i> <u>Synopsis :</u> ${anime.synopsis || "Pas de synopsis disponible."}</p>
     `;
-
     container.appendChild(card);
   });
 }
@@ -133,7 +113,7 @@ function genreCheckboxes() {
     method: "GET",
     headers: {
       "x-rapidapi-host": "anime-db.p.rapidapi.com",
-      "x-rapidapi-key": "98737f8120msh98dc51e460a9eb4p1ea886jsnb5d61cf7a012"
+      "x-rapidapi-key": "6f464de156msh2e28f7c658a93c0p103939jsnb8535fa80c55"
     }
   })
     .then(res => res.json())
@@ -143,18 +123,44 @@ function genreCheckboxes() {
       genreListDiv.innerHTML = "";
       genreListDiv.style.display = "block";
       genre.forEach(g => {
-        const label = document.createElement("label");
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        checkbox.id = g;
-        checkbox.value = g;
-        label.appendChild(checkbox);
-        label.appendChild(document.createTextNode(g._id));
+        checkbox.id = g._id;
+        checkbox.className = "genreCheckbox";
+        const label = document.createElement("label");
+        label.setAttribute("for", g._id);
+        label.textContent = g._id;
+        genreListDiv.appendChild(checkbox);
         genreListDiv.appendChild(label);
       });
     })
     .catch(err => console.error("Erreur API :", err));
 }
+
+function loadAnimesByGenre() {
+  
+  const selectedGenres = [];
+  const checkedBoxes = document.querySelectorAll('#genreList input[type="checkbox"]:checked');
+  checkedBoxes.forEach(cb => selectedGenres.push(cb.id));
+  let selectedGenresString = selectedGenres.join("%2C");
+  //console.log(selectedGenres);
+
+    fetch(`https://anime-db.p.rapidapi.com/anime?page=1&size=10&genres=${selectedGenresString}`, {
+      method: "GET",
+      headers: {
+      "x-rapidapi-host": "anime-db.p.rapidapi.com",
+      "x-rapidapi-key": "6f464de156msh2e28f7c658a93c0p103939jsnb8535fa80c55"
+      }
+    })
+     .then(res => res.json())
+    .then(data => {
+    allAnimes = data.data;
+    displayAnimes(allAnimes);
+    })
+    .catch(err => console.error("Erreur API :", err));
+  }
+
+
 
 document.getElementById("searchBtn").addEventListener("click", () => {
   const query = document.getElementById("search").value.trim();
@@ -163,6 +169,5 @@ document.getElementById("searchBtn").addEventListener("click", () => {
   if (filterType === "title") loadAnimes(query);
   else if (filterType === "id") loadAnimesById(query);
   else if (filterType === "ranking") loadAnimesByRanking(query);
+  else if (filterType === "genre") loadAnimesByGenre();
 });
-
-

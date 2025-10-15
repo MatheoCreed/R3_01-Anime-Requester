@@ -193,6 +193,20 @@ function loadAnimesByGenre() {
   }
 
 
+const boutonChangerApi = document.getElementById("changerapi");
+
+boutonChangerApi.addEventListener("click", () => {
+  const nouvelleCle = prompt("Entrez votre nouvelle clé API :");
+
+  if (nouvelleCle && nouvelleCle.trim() !== "") {
+    cleapisaisie = nouvelleCle.trim();
+    localStorage.setItem("apiKey", cleapisaisie);
+    alert("Nouvelle clé API enregistrée !");
+  } else {
+    alert("Aucune clé API saisie.");
+  }
+});
+
 
 document.getElementById("searchBtn").addEventListener("click", () => {
   const query = document.getElementById("search").value.trim();

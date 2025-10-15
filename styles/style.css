@@ -215,6 +215,21 @@ body.themeSombre main {
     border-radius: 100px;
 }
 
+.boutonapi {
+    position: fixed;
+    height: 37px;
+    top: 20px;
+    right: 250px;
+    padding: 10px 20px;
+    background-color: #F7F6CF;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 100px;
+}
+
 body.themeSombre .boutonTheme {
     background-color: #B8CBD0;
     color: #000000;

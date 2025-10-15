@@ -5,8 +5,10 @@ const boutonTheme = document.getElementById("toggle-theme");
 const filterTypeSelect = document.getElementById("filterType");
 const genreListDiv = document.getElementById("genreList");
 const scrollBtn = document.getElementById("boutonHaut");
+const searchBar = document.getElementById("search");
 let allAnimes = [];
 let cleapisaisie = "";
+
 
 if (localStorage.getItem("theme") === "sombre") {
   document.body.classList.add("themeSombre");
@@ -28,7 +30,7 @@ if (localStorage.getItem("theme") === "sombre") {
     }
   }
 };
-    
+
 boutonTheme.addEventListener("click", () => {
   document.body.classList.add("fade-transition");
 
@@ -56,7 +58,7 @@ function loadAnimes(query = "", callback) {
       else displayAnimes(allAnimes);
     })
     .catch(err => console.error("Erreur API :", err));
-  }
+}
 
 function loadAnimesById(id = "", callback) {
   fetch(`https://anime-db.p.rapidapi.com/anime/by-id/${id}`, {
@@ -85,21 +87,25 @@ function loadAnimesByRanking(rank = "", callback) {
   })
     .then(res => res.json())
     .then(data => {
-     allAnimes = [data];
-     allAnimes = [data];
+    allAnimes = [data];
+    allAnimes = [data];
       if (callback) callback(allAnimes);
       else displayAnimes(allAnimes);
     })
     .catch(err => console.error("Erreur API :", err));
 }
 
+
 filterTypeSelect.addEventListener("change", () => {
-    if (filterTypeSelect.value === "genre") {
-        genreListDiv.style.display = "block"; 
-    } else {
-        genreListDiv.style.display = "none"; 
-    }
+  if (filterTypeSelect.value === "genre") {
+    searchBar.style.display = "none";
+    genreCheckboxes(); 
+  } else {
+    searchBar.style.display = "inline-block"; 
+    genreListDiv.style.display = "none";
+  }
 });
+
 
 function displayAnimes(animes) {
   const container = document.getElementById("results");
@@ -122,7 +128,6 @@ function displayAnimes(animes) {
       <p><i class="fa-solid fa-film"></i> <u>Episodes :</u> ${anime.episodes || "?"}</p>
       <p><i class="fa-solid fa-book"></i> <u>Synopsis :</u> ${anime.synopsis || "Pas de synopsis disponible."}</p>
     `;
-
     container.appendChild(card);
   });
 }
@@ -134,6 +139,61 @@ scrollBtn.addEventListener("click", () => {
   });
 });
 
+let genre;
+function genreCheckboxes() {
+  fetch(`https://anime-db.p.rapidapi.com/genre`, {
+    method: "GET",
+    headers: {
+      "x-rapidapi-host": "anime-db.p.rapidapi.com",
+      "x-rapidapi-key": cleapisaisie
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      genre = data;
+      const genreListDiv = document.getElementById("genreList");
+      genreListDiv.innerHTML = "";
+      genreListDiv.style.display = "block";
+      genre.forEach(g => {
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.id = g._id;
+        checkbox.className = "genreCheckbox";
+        const label = document.createElement("label");
+        label.setAttribute("for", g._id);
+        label.textContent = g._id;
+        genreListDiv.appendChild(checkbox);
+        genreListDiv.appendChild(label);
+      });
+    })
+    .catch(err => console.error("Erreur API :", err));
+}
+
+function loadAnimesByGenre() {
+  
+  const selectedGenres = [];
+  const checkedBoxes = document.querySelectorAll('#genreList input[type="checkbox"]:checked');
+  checkedBoxes.forEach(cb => selectedGenres.push(cb.id));
+  let selectedGenresString = selectedGenres.join("%2C");
+  //console.log(selectedGenres);
+
+    fetch(`https://anime-db.p.rapidapi.com/anime?page=1&size=10&genres=${selectedGenresString}`, {
+      method: "GET",
+      headers: {
+      "x-rapidapi-host": "anime-db.p.rapidapi.com",
+      "x-rapidapi-key": cleapisaisie
+      }
+    })
+     .then(res => res.json())
+    .then(data => {
+    allAnimes = data.data;
+    displayAnimes(allAnimes);
+    })
+    .catch(err => console.error("Erreur API :", err));
+  }
+
+
+
 document.getElementById("searchBtn").addEventListener("click", () => {
   const query = document.getElementById("search").value.trim();
   const filterType = document.getElementById("filterType").value;
@@ -141,6 +201,5 @@ document.getElementById("searchBtn").addEventListener("click", () => {
   if (filterType === "title") loadAnimes(query);
   else if (filterType === "id") loadAnimesById(query);
   else if (filterType === "ranking") loadAnimesByRanking(query);
+  else if (filterType === "genre") loadAnimesByGenre();
 });
-
-

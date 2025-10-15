@@ -153,21 +153,31 @@ function genreCheckboxes() {
       genre = data;
       const genreListDiv = document.getElementById("genreList");
       genreListDiv.innerHTML = "";
-      genreListDiv.style.display = "block";
+      genreListDiv.style.display = "grid";
+      genreListDiv.style.gridTemplateColumns = "repeat(auto-fill, minmax(150px, 1fr))";
+      genreListDiv.style.gap = "10px";
+
       genre.forEach(g => {
+        const container = document.createElement("div");
+        container.className = "genreItem";
+
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.id = g._id;
         checkbox.className = "genreCheckbox";
+
         const label = document.createElement("label");
         label.setAttribute("for", g._id);
         label.textContent = g._id;
-        genreListDiv.appendChild(checkbox);
-        genreListDiv.appendChild(label);
+
+        container.appendChild(checkbox);
+        container.appendChild(label);
+        genreListDiv.appendChild(container);
       });
     })
     .catch(err => console.error("Erreur API :", err));
 }
+
 
 function loadAnimesByGenre() {
   
